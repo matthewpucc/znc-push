@@ -9,6 +9,7 @@ conditions.  ZNC Push current supports the following services:
 * [Notifo][]
 * [Notify My Android][] (NMA)
 * [Prowl][]
+* [Pushover][]
 
 This project is still a Work In Progress, but should be functional enough and stable enough
 for everyday usage.  Users are more than welcome to submit feature requests or patches for

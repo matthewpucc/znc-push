@@ -300,6 +300,24 @@ class CPushMod : public CModule
 				params["description"] = short_message;
 				params["url"] = uri;
 			}
+      else if (service == "pushover")
+      {
+        if (options["username"] == "")
+        {
+          PutModule("Error: username not set");
+          return;
+        }
+        
+        CString pushover_app_key = "cRSbjPH7KB0KL7HGnoCnT44LIlbhG5";
+      
+        service_host = "api.pushover.net";
+        service_url = "/1/messages.json";
+
+        params["token"] = pushover_app_key;
+        params["user"] = options["username"];
+        params["title"] = title;
+        params["message"] = short_message;
+      }
 			else
 			{
 				PutModule("Error: service type not selected");
@@ -695,7 +713,7 @@ class CPushMod : public CModule
 				CString title = "Highlight";
 				CString msg = channel.GetName();
 				msg += ": <" + nick.GetNick();
-				msg += "> " + message;
+				msg += ">";
 
 				send_message(msg, title, channel.GetName());
 			}
@@ -717,7 +735,6 @@ class CPushMod : public CModule
 				CString title = "Highlight";
 				CString msg = channel.GetName();
 				msg += ": " + nick.GetNick();
-				msg += " " + message;
 
 				send_message(msg, title, channel.GetName());
 			}
@@ -737,7 +754,6 @@ class CPushMod : public CModule
 			{
 				CString title = "Private Message";
 				CString msg = "From " + nick.GetNick();
-				msg += ": " + message;
 
 				send_message(msg, title, nick.GetNick());
 			}
@@ -757,7 +773,6 @@ class CPushMod : public CModule
 			{
 				CString title = "Private Message";
 				CString msg = "* " + nick.GetNick();
-				msg += " " + message;
 
 				send_message(msg, title, nick.GetNick());
 			}
@@ -901,6 +916,10 @@ class CPushMod : public CModule
 						{
 							PutModule("Note: Prowl requires setting the 'secret' option");
 						}
+            else if (value == "pushover")
+            {
+              PutModule("Note: Pushover requires setting the 'username' option");
+            }
 						else
 						{
 							PutModule("Error: unknown service name");
