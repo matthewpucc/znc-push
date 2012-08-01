@@ -162,12 +162,13 @@ Configuration
     *   "notifo"
     *   "nma"
     *   "prowl"
+    *   "pushover"
 
 *   `username = ""`
 
     User account that should receive push notifications.
 
-    This option must be set when using Boxcar or Notifo.
+    This option must be set when using Boxcar, Pushover or Notifo.
 
 *   `secret = ""`
 
