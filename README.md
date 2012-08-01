@@ -341,6 +341,7 @@ This project is licensed under the MIT license.  See the `LICENSE` file for deta
 [Notifo]: http://notifo.com
 [Notify My Android]: http://www.notifymyandroid.com
 [Prowl]: http://www.prowlapp.com
+[Pushover]: https://pushover.net/
 
 [mantis]: http://leetcode.net/mantis
 [ZNC]: http://en.znc.in "ZNC, an advanced IRC bouncer"
