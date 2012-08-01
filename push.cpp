@@ -114,6 +114,7 @@ class CPushMod : public CModule
 			defaults["service"] = "";
 			defaults["username"] = "";
 			defaults["secret"] = "";
+			defaults["target"] = "";
 
 			// Condition strings
 			defaults["channel_conditions"] = "all";
@@ -318,6 +319,26 @@ class CPushMod : public CModule
         params["title"] = title;
         params["message"] = short_message;
       }
+			else if (service == "supertoasty")
+			{
+				if (options["secret"] == "")
+				{
+					PutModule("Error: secret (device id) not set");
+					return;
+				}
+
+				use_post = false;
+				use_port = 80;
+				use_ssl = false;
+
+				service_host = "api.supertoasty.com";
+				service_url = "/notify/"+options["secret"];
+
+				params["title"] = title;
+				params["text"] = short_message;
+				params["image"] = "https://github.com/jreese/znc-push/raw/supertoasty/logo.png";
+				params["sender"] = "ZNC Push";
+			}
 			else
 			{
 				PutModule("Error: service type not selected");
@@ -920,6 +941,10 @@ class CPushMod : public CModule
             {
               PutModule("Note: Pushover requires setting the 'username' option");
             }
+						else if (value == "supertoasty")
+						{
+							PutModule("Note: Supertoasty requires setting the 'secret' option with device id");
+						}
 						else
 						{
 							PutModule("Error: unknown service name");
